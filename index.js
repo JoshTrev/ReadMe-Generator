@@ -75,65 +75,105 @@ inquirer
             if (err) {
                 return console.log(err);
             }
-        });
 
-        // Append description.
-        fs.appendFile("README.md", "\n\n" + response.description, function (err) {
-            if (err) {
-                return console.log(err);
+            // Append license variables.
+
+            var MIT = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+            var Apache = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+            var GPL = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+            var BSD = "[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+            var none = "none";
+
+            var licenseButton = "";
+
+            // Determining which response was chosen.
+
+            if (response.license === "MIT") {
+                licenseButton = MIT;
             }
-        });
 
-        var tableOfContents = "* [Installation](#installation)\n\n* [Usage](#usage)\n\n* [License](#license)\n\n* [Contributing](#contributing)\n\n* [Tests](#tests)\n\n* [Questions](#questions)";
-
-        // Append table of contents.
-        fs.appendFile("README.md", "\n\n## Table of Contents" + "\n\n" + tableOfContents, function (err) {
-            if (err) {
-                return console.log(err);
+            else if (response.license === "Apache 2.0") {
+                licenseButton = Apache;
             }
-        });
 
-        // Append installation section.
-        fs.appendFile("README.md", "\n\n## Installation" + "\n\nTo install necessary dependencies, run the following command:\n\n```\n" + response.installation + "\n```", function (err) {
-            if (err) {
-                return console.log(err);
+            else if (response.license === "GPL 3.0") {
+                licenseButton = GPL;
             }
-        });
 
-        // Append usage section.
-        fs.appendFile("README.md", "\n\n## Usage" + "\n\n" + response.usage, function (err) {
-            if (err) {
-                return console.log(err);
+            else if (response.license === "BSD 3") {
+                licenseButton = BSD;
             }
-        });
 
-        // Append license section.
-        fs.appendFile("README.md", "\n\n## License" + "\n\nThis project is licensed under the " + response.license + "license.", function (err) {
-            if (err) {
-                return console.log(err);
+            else if (response.license === "None") {
+                licenseButton = none;
             }
-        });
 
-        // Append contributing section.
-        fs.appendFile("README.md", "\n\n## Contributing" + "\n\n" + response.contribution, function (err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
+            // Appending license button.
 
-        // Append tests section.
-        fs.appendFile("README.md", "\n\n## Tests" + "\n\nTo run tests, run the following command:\n\n```\n" + response.test + "\n```", function (err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
+            fs.appendFile("README.md", "\n\n" + licenseButton, function (err) {
+                if (err) {
+                    return console.log(err);
+                }
 
-        // Append contact section with username.
-        fs.appendFile("README.md", "\n\n## Questions" + "\n\nIf you have any questions about the repo, open an issue or contact me directly by email at [" + response.email + "](mailto:" + response.email + "). You can find more of my work at [" + response.github + "](https://github.com/" + response.github + ")", function (err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
+                // Append description.
+                fs.appendFile("README.md", "\n\n## Description" + "\n\n" + response.description, function (err) {
+                    if (err) {
+                        return console.log(err);
+                    }
 
-        console.log("Success!");
+                    var tableOfContents = "* [Installation](#installation)\n\n* [Usage](#usage)\n\n* [License](#license)\n\n* [Contributing](#contributing)\n\n* [Tests](#tests)\n\n* [Questions](#questions)";
+
+                    // Append table of contents.
+                    fs.appendFile("README.md", "\n\n## Table of Contents" + "\n\n" + tableOfContents, function (err) {
+                        if (err) {
+                            return console.log(err);
+                        }
+
+                        // Append installation section.
+                        fs.appendFile("README.md", "\n\n## Installation" + "\n\nTo install necessary dependencies, run the following command:\n\n```\n" + response.installation + "\n```", function (err) {
+                            if (err) {
+                                return console.log(err);
+                            }
+
+                            // Append usage section.
+                            fs.appendFile("README.md", "\n\n## Usage" + "\n\n" + response.usage, function (err) {
+                                if (err) {
+                                    return console.log(err);
+                                }
+
+                                // Append license section.
+                                fs.appendFile("README.md", "\n\n## License" + "\n\nThis project is licensed under the " + response.license + " license.", function (err) {
+                                    if (err) {
+                                        return console.log(err);
+                                    }
+
+                                    // Append contributing section.
+                                    fs.appendFile("README.md", "\n\n## Contributing" + "\n\n" + response.contribution, function (err) {
+                                        if (err) {
+                                            return console.log(err);
+                                        }
+
+                                        // Append tests section.
+                                        fs.appendFile("README.md", "\n\n## Tests" + "\n\nTo run tests, run the following command:\n\n```\n" + response.test + "\n```", function (err) {
+                                            if (err) {
+                                                return console.log(err);
+                                            }
+
+                                            // Append contact section with username.
+                                            fs.appendFile("README.md", "\n\n## Questions" + "\n\nIf you have any questions about the repo, open an issue or contact me directly by email at [" + response.email + "](mailto:" + response.email + "). You can find more of my work at [" + response.github + "](https://github.com/" + response.github + ")", function (err) {
+                                                if (err) {
+                                                    return console.log(err);
+                                                }
+
+                                                console.log("Success!");
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
     });
